@@ -24,9 +24,8 @@
         "pull": "thingysync pull",
         "postinstall": "pnpm run initialize-thingy",
         "initialize-thingy": "run-s -ns build",
-        "copy-all-js": "cp sources/source/*/*.js output/",
-        "build": "run-s -ns clean-package copy-all-js build-live build-coffee copyscript install-node-modules",
-        "watch": "run-p -nsr copy-all-js watch-live watch-coffee",
+        "build": "run-s -ns clean-package build-live build-coffee copyscript install-node-modules",
+        "watch": "run-p -nsr watch-live watch-coffee",
         "release": "run-s -ns build publish-script",
         "package-update-release": "run-s -ns update-tools update-packages inc-versions update-cli-packages push release",
         "inc-versions": "toolset/thingy-build-system/package/inc-versions.js",
@@ -54,10 +53,11 @@
         "npm-check-updates": "^19.1.1",
         "npm-run-all": "^4.1.5",
         "thingy-allmodules-sync": "^0.2.0",
+        "thingy-debug": "^0.0.1",
         "thingy-module-gen": "^0.1.6",
+        "thingy-schema-validate": "^0.0.5",
         "thingymodulecreate": "^0.1.8",
-        "thingysync": "^0.1.2",
-        "thingy-debug": "^0.0.1"
+        "thingysync": "^0.1.2"
     },
     "thingytype": "package",
     "lang": "en"

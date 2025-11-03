@@ -29,6 +29,9 @@ importers:
       thingy-module-gen:
         specifier: ^0.1.6
         version: 0.1.6(@types/node@24.9.2)
+      thingy-schema-validate:
+        specifier: ^0.0.5
+        version: 0.0.5
       thingymodulecreate:
         specifier: ^0.1.8
         version: 0.1.8
@@ -1374,6 +1377,9 @@ packages:
   thingy-module-gen@0.1.6:
     resolution: {integrity: sha512-/YvGbX5H9uBmQTnlMF4i5UyWu46scAhUF9XTNzlhvIRrEsDCVyhS1afNlC2+qlQ7jgNeWNl2boexDK6e9vGHDA==}
     hasBin: true
+
+  thingy-schema-validate@0.0.5:
+    resolution: {integrity: sha512-K9nFETjqHxfU4uXQXJtMbfnw8dx7JlxlgTumjuZnc6rExip8IbMxxxcsOQ1cnnTMtn3w1IjJLuHuN4l1ajRwVA==}
 
   thingymodulecreate@0.1.8:
     resolution: {integrity: sha512-NJOJbhAYYCqBg3eyC5HkrfOnndGUFaLD278lKnpB6EcaY+zIyMNYL/q1/EYofhe4JB848G3WgX2Xb+zWd67aRg==}
@@ -3159,6 +3165,8 @@ snapshots:
       mustache: 4.2.0
     transitivePeerDependencies:
       - '@types/node'
+
+  thingy-schema-validate@0.0.5: {}
 
   thingymodulecreate@0.1.8:
     dependencies:

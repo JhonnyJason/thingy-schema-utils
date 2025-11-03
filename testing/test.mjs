@@ -25,10 +25,9 @@ const olog = function(arg) {
 async function run() {
     //run tests
     try {
-        await specialTest()
-        // await runRawTypeTests(testsForType)
-        // await runSchemaTests(testsForSchema) 
-        // await runSchemaStringifySpeedTests(testsForSchema) 
+        // await specialTest()
+        await runRawTypeTests(testsForType)
+        await runSchemaTests(testsForSchema) 
     } catch (error) {
         console.error(error)
         report.unexpectedError = error.message
@@ -44,106 +43,28 @@ function executeTestCase(caseId, schema, input, shouldBeValid) {
     // olog({schema, input, shouldBeValid})
     const validate = m.createValidator(schema)
     // console.log("created the validator!")
-    const stringify = m.createStringifier(schema)
-    // console.log("created the stringifier!")
 
     const err = validate(input)
+    const err2 = m.validate(input, schema)
+    if (err !== err2) {
+        return report.failReports.push("@"+caseId+" validation functions differed! err:"+err+":"+m.getErrorMessage(err)+" err2:"+err2+":"+m.getErrorMessage(err2))        
+    }
     // console.log("after validation!")
 
     if(err && shouldBeValid) {
-        return report.failReports.push("\n@"+caseId+" wrong Validation! shouldBeValid:"+shouldBeValid+" err:"+err+" errMessage:"+m.getErrorMessage(err))
+        return report.failReports.push("@"+caseId+" wrong Validation! shouldBeValid:"+shouldBeValid+" err:"+err+" errMessage:"+m.getErrorMessage(err))
     } else if(err &&  !shouldBeValid) {  
         return report.successes++ 
     } else if(!err && !shouldBeValid) {
-        return report.failReports.push("\n@"+caseId+" wrong Validation! shouldBeValid:"+shouldBeValid+" err:"+err+" errMessage:"+m.getErrorMessage(err))
-    }
-
-    const ref = JSON.stringify(input)
-    const ours = stringify(input)
-    if(ref !== ours) {
-        return report.failReports.push("\n@"+caseId+" "+ours+" != "+ref+" original was: "+input)
-    } else {
+        return report.failReports.push("@"+caseId+" wrong Validation! shouldBeValid:"+shouldBeValid+" err:"+err+" errMessage:"+m.getErrorMessage(err))
+    }else {
         return report.successes++
     }
-
 }
 
-function executeStringifySpeedTest(caseId, schema, input) {
-    // console.log("executeTestCase @"+caseId)
-    // olog({schema, input})
-    const validate = m.createValidator(schema)
-    // console.log("created the validator!")
-    const stringify = m.createStringifier(schema)
-    // console.log("created the stringifier!")
-
-    var err = validate(input)
-    // console.log("after validation!")
-
-    if(err) {
-        return report.failReports.push("\n@"+caseId+" Validation failed! err:"+err+" errMessage:"+m.getErrorMessage(err))
-    }
-
-    var ref = JSON.stringify(input)
-    var ours = stringify(input)
-    if(ref !== ours) {
-        return report.failReports.push("\n@"+caseId+" "+ours+" != "+ref+" original was: "+input)
-    }
-
-    const initialCount = 1000000
-    // warmup
-    var timeMS, start;
-    var count = initialCount
-    while(count--) {
-        ref = JSON.stringify(input)
-    }
-    count = initialCount
-    while(count--) {
-        ours = stringify(input)
-    }
-
-    // JSON.stringify go
-    count = initialCount
-    start = performance.now()
-    while(count--) {
-        ref = JSON.stringify(input)
-    }
-    timeMS = performance.now() - start
-    console.log(caseId+" JSON.stringify: "+timeMS)
-
-    count = initialCount
-    start = performance.now()
-    while(count--) {
-        ours = stringify(input)
-    }
-    timeMS = performance.now() - start
-    console.log(caseId+" ourStringify: "+timeMS)
-
-    count = initialCount
-    start = performance.now()
-    while(count--) {
-        err = validate(input)
-        if (err !== undefined) {
-            return report.failReports.push("\n@"+caseId+" Validation failed! err:"+err+" errMessage:"+m.getErrorMessage(err))
-        } else { ref = JSON.stringify(input) }
-    }
-    timeMS = performance.now() - start
-    console.log(caseId+" validate + JSON.stringify: "+timeMS)
-
-    count = initialCount
-    start = performance.now()
-    while(count--) {
-        err = validate(input)
-        if (err !== undefined) {
-            return report.failReports.push("\n@"+caseId+" Validation failed! err:"+err+" errMessage:"+m.getErrorMessage(err))
-        } else { ours = stringify(input) }
-    }
-    timeMS = performance.now() - start
-    console.log(caseId+" validate + ourStringify: "+timeMS)
-    console.log("")
-}
 
 async function specialTest() {
-    const count = 1000000
+    const count = 10000000
 
     oldVal.testValidateSpeed(count)
     newVal.testValidateSpeed(count)
@@ -178,7 +99,7 @@ async function runRawTypeTests(tests) {
             var shouldBeValid = testCase[1]
             var caseId = typeString+":"+j
             var schema = type 
-            console.log(caseId)
+            // console.log(caseId)
             executeTestCase(caseId, schema, input, shouldBeValid)
         }
     }
@@ -212,22 +133,4 @@ async function runSchemaTests(tests) {
 
     }
 
-}
-
-
-async function runSchemaStringifySpeedTests(tests) {
-    var schemaTest, schema, validSamples,caseId, input, i, j;
-
-    for(i = 0; i < tests.length; i++){
-        schemaTest = tests[i]
-        schema = schemaTest.schema
-
-        //checking valid ones...
-        validSamples = schemaTest.validSamples
-        for(j = 0; j < validSamples.length; j++) {
-            caseId = "schema:"+i+":valid:"+j
-            input = validSamples[j]
-            executeStringifySpeedTest(caseId, schema, input)
-        }
-    }
 }

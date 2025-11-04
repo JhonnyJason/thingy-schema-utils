@@ -267,39 +267,33 @@ testsForType[STRINGHEX512] = [
     ["f".repeat(513), false]
 ]
 testsForType[STRINGCLEAN] = [
-    [null, false],
-    [undefined, false],
-    [{}, false],
-    [[], false],
-    [0, false],
-    [false, false],
-    ["Hello", true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],  
-    ["", true],
-    [" ", true],
-    ["a", true],
-    ["hello world", true],
-    ["こんにちは", true],
-    ["🙂", true],
-    ["abc\u200bdef", false],
-    ["abc\u200ddef", false],
-    ["abc\uFEFFdef", false],
-    ["\u00A0", false],
-    ["\t", true],
-    ["\n", true],
-    ["💩", true],
-    ["abc\x00def", false],
-    ["abc\r\n", true],
-    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", true],
-    ["a".repeat(1024), true]
+    [null, false], // 0
+    [undefined, false], // 1
+    [{}, false], // 2
+    [[], false], // 3
+    [0, false], // 4
+    [false, false], // 5
+    ["Hello", true], // 6
+    ["こんにちは", false], // 7
+    ["abc\x00def", false], // 8
+    ["line\nbreak", true], // 9
+    ["tab\tchar", true], // 10
+    ["💩", false], // 11
+    ["visible space ", true], // 12
+    ["abc\u200bdef", false], // 13
+    ["abc\uFEFFdef", false], // 14
+    ["abc\u202Edef", false], // 15
+    ["", true], // 16
+    [" ", true], // 17
+    ["a", true], // 18
+    ["hello world", true], // 19
+    ["🙂", false], // 20
+    ["\u00A0", true], // 21
+    ["\t", true], // 22
+    ["\n", true], // 23
+    ["abc\r\n", false], // 24
+    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", false], // 25
+    ["a".repeat(1024), true] // 26
 ]
 testsForType[NONEMPTYSTRING] = [
     [null, false],
@@ -350,39 +344,33 @@ testsForType[NONEMPTYSTRINGHEX] = [
     ["00ff ", false]
 ]
 testsForType[NONEMPTYSTRINGCLEAN] = [
-    [null, false],
-    [undefined, false],
-    [{}, false],
-    [[], false],
-    [0, false],
-    [false, false],
-    ["Hello", true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],  
-    ["", false],
-    [" ", true],
-    ["a", true],
-    ["hello world", true],
-    ["こんにちは", true],
-    ["🙂", true],
-    ["abc\u200bdef", false],
-    ["abc\u200ddef", false],
-    ["abc\uFEFFdef", false],
-    ["\u00A0", false],
-    ["\t", true],
-    ["\n", true],
-    ["💩", true],
-    ["abc\x00def", false],
-    ["abc\r\n", true],
-    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", true],
-    ["a".repeat(1024), true]
+    [null, false], // 0
+    [undefined, false], // 1
+    [{}, false], // 2
+    [[], false], // 3
+    [0, false], // 4
+    [false, false], // 5
+    ["Hello", true], // 6
+    ["こんにちは", false], // 7
+    ["abc\x00def", false], // 8
+    ["line\nbreak", true], // 9
+    ["tab\tchar", true], // 10
+    ["💩", false], // 11
+    ["visible space ", true], // 12
+    ["abc\u200bdef", false], // 13
+    ["abc\uFEFFdef", false], // 14
+    ["abc\u202Edef", false], // 15
+    ["", false], // 16
+    [" ", true], // 17
+    ["a", true], // 18
+    ["hello world", true], // 19
+    ["🙂", false], // 20
+    ["\u00A0", true], // 21
+    ["\t", true], // 22
+    ["\n", true], // 23
+    ["abc\r\n", false], // 24
+    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", false], // 25
+    ["a".repeat(1024), true] // 26
 ]
 testsForType[NONEMPTYARRAY] = [
     [null, false],
@@ -676,48 +664,33 @@ testsForType[STRINGHEX512ORNOTHING] = [
     ["a".repeat(512), true]
 ]
 testsForType[STRINGCLEANORNOTHING] = [
-    [null, false],
-    [{}, false],
-    [[], false],
-    [0, false],
-    [false, false],
-    [undefined, true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],  
-    ["Hello", true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],  
-    ["", true],
-    [" ", true],
-    ["a", true],
-    ["hello world", true],
-    ["こんにちは", true],
-    ["🙂", true],
-    ["abc\u200bdef", false],
-    ["abc\u200ddef", false],
-    ["abc\uFEFFdef", false],
-    ["\u00A0", false],
-    ["\t", true],
-    ["\n", true],
-    ["💩", true],
-    ["abc\x00def", false],
-    ["abc\r\n", true],
-    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", true],
-    ["a".repeat(1024), true]
+    [null, false], // 0
+    [undefined, true], // 1
+    [{}, false], // 2
+    [[], false], // 3
+    [0, false], // 4
+    [false, false], // 5
+    ["Hello", true], // 6
+    ["こんにちは", false], // 7
+    ["abc\x00def", false], // 8
+    ["line\nbreak", true], // 9
+    ["tab\tchar", true], // 10
+    ["💩", false], // 11
+    ["visible space ", true], // 12
+    ["abc\u200bdef", false], // 13
+    ["abc\uFEFFdef", false], // 14
+    ["abc\u202Edef", false], // 15
+    ["", true], // 16
+    [" ", true], // 17
+    ["a", true], // 18
+    ["hello world", true], // 19
+    ["🙂", false], // 20
+    ["\u00A0", true], // 21
+    ["\t", true], // 22
+    ["\n", true], // 23
+    ["abc\r\n", false], // 24
+    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", false], // 25
+    ["a".repeat(1024), true] // 26
 ]
 testsForType[NUMBERORNOTHING] = [
     [null, false],
@@ -1031,48 +1004,33 @@ testsForType[STRINGHEX512ORNULL] = [
     [null, true]
 ]
 testsForType[STRINGCLEANORNULL] = [
-    [undefined, false],
-    [{}, false],
-    [[], false],
-    [0, false],
-    [false, false],
-    [null, true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],
-    ["Hello", true],
-    ["こんにちは", true],
-    ["abc\x00def", false],
-    ["line\nbreak", true],
-    ["tab\tchar", true],
-    ["💩", true],
-    ["visible space ", true],
-    ["abc\u200bdef", false], 
-    ["abc\uFEFFdef", false], 
-    ["abc\u202Edef", false],  
-    ["", true],
-    [" ", true],
-    ["a", true],
-    ["hello world", true],
-    ["こんにちは", true],
-    ["🙂", true],
-    ["abc\u200bdef", false],
-    ["abc\u200ddef", false],
-    ["abc\uFEFFdef", false],
-    ["\u00A0", false],
-    ["\t", true],
-    ["\n", true],
-    ["💩", true],
-    ["abc\x00def", false],
-    ["abc\r\n", true],
-    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", true],
-    ["a".repeat(1024), true]
+    [null, true], // 0
+    [undefined, false], // 1
+    [{}, false], // 2
+    [[], false], // 3
+    [0, false], // 4
+    [false, false], // 5
+    ["Hello", true], // 6
+    ["こんにちは", false], // 7
+    ["abc\x00def", false], // 8
+    ["line\nbreak", true], // 9
+    ["tab\tchar", true], // 10
+    ["💩", false], // 11
+    ["visible space ", true], // 12
+    ["abc\u200bdef", false], // 13
+    ["abc\uFEFFdef", false], // 14
+    ["abc\u202Edef", false], // 15
+    ["", true], // 16
+    [" ", true], // 17
+    ["a", true], // 18
+    ["hello world", true], // 19
+    ["🙂", false], // 20
+    ["\u00A0", true], // 21
+    ["\t", true], // 22
+    ["\n", true], // 23
+    ["abc\r\n", false], // 24
+    ["𝔘𝔫𝔦𝔠𝔬𝔡𝔢", false], // 25
+    ["a".repeat(1024), true] // 26
 ] 
 testsForType[NUMBERORNULL] = [
     [undefined, false],

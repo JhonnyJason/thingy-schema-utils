@@ -27,7 +27,7 @@ async function run() {
     try {
         // await specialTest()
         await runRawTypeTests(testsForType)
-        await runSchemaTests(testsForSchema) 
+        await runSchemaTests(testsForSchema)
     } catch (error) {
         console.error(error)
         report.unexpectedError = error.message
